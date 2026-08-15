@@ -16,6 +16,7 @@ class _Add_TaskState extends State<Add_Task> {
   late Priority _priority;
   late Status _status;
   late DateTime _date;
+  String _errorMessage = '';
   
   @override
   void initState()
@@ -39,6 +40,11 @@ class _Add_TaskState extends State<Add_Task> {
 
       Column(
         children: [
+          if (_errorMessage.isNotEmpty)
+            Text(
+              _errorMessage,
+              style: const TextStyle(color: Colors.red),
+            ),
           Row(
             children: [
               Text("Title: "),
@@ -143,8 +149,16 @@ class _Add_TaskState extends State<Add_Task> {
               status: _status,
               date: _date
             );
-            Navigator.pop(context,newTask);
-
+            if(_titleController.text.isEmpty)
+            {
+              setState(() {
+                _errorMessage="No allowed empty fields!";
+              });
+              return;
+            }
+            else{
+              Navigator.pop(context,newTask);
+            }
           }
           ),
         ],

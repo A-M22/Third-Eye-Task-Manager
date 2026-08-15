@@ -97,7 +97,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    final Task updatedTask=await
+                    final updatedTask=await
                     Navigator.push(context,MaterialPageRoute(builder:(context)=>Add_Task(add:false,task:currentTask)));
                     if(updatedTask!=null)
                     {
