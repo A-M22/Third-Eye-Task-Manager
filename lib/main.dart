@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:third_eye_task_manager/PL/card.dart';
+import 'package:third_eye_task_manager/PL/home.dart';
 import 'package:third_eye_task_manager/PL/login_screen.dart';
 
 void main() {
@@ -9,13 +11,22 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Third Eye Task Manager',
+
       
-      home: LoginScreen(),
+
+      initialRoute: '/login',
+
+      routes: {
+        '/login':(context)=>const LoginScreen(),
+        '/home':(context)=>const home_screen(),
+      },
     );
   }
 }

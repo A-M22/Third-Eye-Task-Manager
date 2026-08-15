@@ -82,6 +82,7 @@ class _LoginScreen extends State<LoginScreen> {
                         errorMessage="";
                       });
                       //go to homepage after success//
+                      Navigator.pushReplacementNamed(context, '/home');
                     }
                   }, 
                   child:Text('Log in'), 
