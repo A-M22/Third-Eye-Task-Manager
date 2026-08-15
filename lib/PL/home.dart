@@ -43,7 +43,8 @@ class _home_screenState extends State<home_screen> {
       body:
       SafeArea(child:
       Container(
-        child: ListView.builder(
+        
+        child:tasks.isEmpty ? Center(child: Text("No tasks available")) : ListView.builder(
           padding:const EdgeInsets.all(10.0),
           
           itemCount: tasks.length,
