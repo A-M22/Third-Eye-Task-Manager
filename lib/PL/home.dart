@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:third_eye_task_manager/PL/addTask.dart';
 import 'package:third_eye_task_manager/PL/card.dart';
 import 'package:third_eye_task_manager/Models/task_model.dart';
 
@@ -40,6 +41,22 @@ class _home_screenState extends State<home_screen> {
       appBar: AppBar(
         title: Text("Third Eye Task Manager"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()async {
+          final newTask= await
+          Navigator.push(context,
+          MaterialPageRoute(builder: (context) =>
+            Add_Task(add:true,task:Task(date:DateTime.now(),title:"",priority: Priority.low,status: Status.pending,description: " "))
+          ));
+          if(newTask!=null)
+          {
+            setState(() {
+              tasks.add(newTask);
+            });
+          }
+        },
+        child: Icon(Icons.add),
+      ),
       body:
       SafeArea(child:
       Container(
@@ -52,7 +69,18 @@ class _home_screenState extends State<home_screen> {
             return Column(
               children: [
                 SizedBox(height: 10.0,),
-                TaskCard(task: tasks[index]),
+                TaskCard(task: tasks[index],
+                onDelete:(){
+                  setState((){
+                    tasks.removeAt(index);
+                  });
+                },
+                onUpdate:(updatedTask){
+                  setState(() {
+                    tasks[index]=updatedTask;
+                  });
+                }
+                )
               ],
             );
           },

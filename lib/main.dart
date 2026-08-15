@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:third_eye_task_manager/PL/TaskDetailsScreen.dart';
 import 'package:third_eye_task_manager/PL/card.dart';
 import 'package:third_eye_task_manager/PL/home.dart';
 import 'package:third_eye_task_manager/PL/login_screen.dart';

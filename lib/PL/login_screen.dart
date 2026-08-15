@@ -14,6 +14,7 @@ class _LoginScreen extends State<LoginScreen> {
   bool _hidden=true;
   String errorMessage='';
   final emailRegex=RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+  bool isloggedin=true;
 
   @override 
   Widget build(BuildContext context) {
@@ -64,6 +65,9 @@ class _LoginScreen extends State<LoginScreen> {
                   SizedBox(height: 20.0,),
                   ElevatedButton(onPressed: ()
                   {
+
+                    isloggedin?  Navigator.pushReplacementNamed(context, '/home'):context;
+
                     if(_email.isEmpty || _password.isEmpty)
                     {
                       setState(() {
