@@ -143,6 +143,7 @@ class _Add_TaskState extends State<Add_Task> {
           ElevatedButton(child:Text(add?"Add Task":"Edit Task"),
           onPressed:(){
             final Task newTask=Task(
+              id: widget.task.id,
               title: _titleController.text,
               description: _descController.text,
               priority: _priority,

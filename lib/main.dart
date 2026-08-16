@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:third_eye_task_manager/PL/TaskDetailsScreen.dart';
-import 'package:third_eye_task_manager/PL/card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:third_eye_task_manager/BLL/task_cubit.dart';
 import 'package:third_eye_task_manager/PL/home.dart';
 import 'package:third_eye_task_manager/PL/login_screen.dart';
 
@@ -16,18 +16,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Third Eye Task Manager',
-
-      
-
-      initialRoute: '/login',
-
-      routes: {
-        '/login':(context)=>const LoginScreen(),
-        '/home':(context)=>const home_screen(),
-      },
+    return  BlocProvider(
+      create:(context)=>TaskCubit()..fetchAllTasks(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Third Eye Task Manager',
+        initialRoute: '/login',
+        routes: {
+          '/login':(constext)=>const LoginScreen(),
+          '/home':(context)=>const home_screen(),
+        },
+      ),
     );
   }
 }

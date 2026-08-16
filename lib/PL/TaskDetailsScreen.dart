@@ -75,6 +75,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                     if(newStatus !=null){
                       setState(() {
                         currentTask=Task(
+                          id:currentTask.id,
                           title: currentTask.title,
                           description:currentTask.description,
                           priority:currentTask.priority,

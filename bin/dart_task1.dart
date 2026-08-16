@@ -40,8 +40,4 @@ void main()
   print("even Numbers: $evenNumbers\n");
   print("List Total: $listTotal\n");
   print('minimum value in the list: $min \nmaximum value in the list: $max\n');
-
-  
-
-
 }

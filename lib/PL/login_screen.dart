@@ -33,7 +33,7 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
                 SizedBox(height: 40,),
                 Text(
-                  '$errorMessage',
+                  errorMessage,
                   style:TextStyle(color:Colors.red,fontWeight: FontWeight.bold),
                   ),
                 SizedBox(height: 20.0,),
