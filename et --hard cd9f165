@@ -1,0 +1,12 @@
+[33m81a3267[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to 81a3267
+[33mcd9f165[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: reset: moving to cd9f165
+[33m81a3267[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{2}: reset: moving to origin/main
+[33m81a3267[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{3}: commit: Implement REST API integration and BLoC state management
+[33mcd9f165[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{4}: commit: completed task 5 validation
+[33mdc9b232[m HEAD@{5}: commit: completed task 4 add,edit,delete with alert, details, and status alter
+[33m13a13a2[m HEAD@{6}: commit: add handling epty tasks list
+[33m51a55a4[m HEAD@{7}: commit: Complete Task 3
+[33m3c9de2f[m HEAD@{8}: commit: complete Task 2 login screen
+[33mf6f12aa[m HEAD@{9}: commit: Task 1 Dart Fundamentals 1
+[33mb7b585d[m HEAD@{10}: Branch: renamed refs/heads/master to refs/heads/main
+[33mb7b585d[m HEAD@{12}: commit (initial): Project creation

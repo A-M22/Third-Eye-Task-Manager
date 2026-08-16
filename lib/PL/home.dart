@@ -18,77 +18,85 @@ class _home_screenState extends State<home_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Third Eye Task Manager"),
+        title: const Text("Third Eye Task Manager"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()async {
-          final newTask= await
-          Navigator.push(context,
-          MaterialPageRoute(builder: (context) =>
-            Add_Task(add:true,task:Task(date:DateTime.now(),title:"",priority: Priority.low,status: Status.pending,description: " "))
-          ));
-          if(newTask!=null)
-          {
+        onPressed: () async {
+          final newTask = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Add_Task(
+                add: true,
+                task: Task(
+                  date: DateTime.now(),
+                  title: "",
+                  priority: Priority.low,
+                  status: Status.pending,
+                  description: " ",
+                ),
+              ),
+            ),
+          );
+          if (newTask != null) {
             context.read<TaskCubit>().addTask(newTask);
           }
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
-      body:
-      SafeArea(child:
-      Container(
-        
-        child:BlocBuilder<TaskCubit, TaskState>(
-        builder: (context, state){
-          if(state is TaskLoading)
-          {
-            return const Center(child: CircularProgressIndicator());
-          }
-          else if(state is TaskError)
-          {
-            return Center(
-              child: Column(
-                mainAxisAlignment:MainAxisAlignment.center,
-                children: [
-                  Text(state.message,style: const TextStyle(color: Colors.red),),
-                  ElevatedButton(onPressed: (){context.read<TaskCubit>().fetchAllTasks();},
-                  child: const Text("Retry")),
-                ],
-              ),
-            );
-          }
-          else if(state is TaskEmpty) {
-            return const Center(child: Text("No Tasks Availbe"));
-          }
-          else if( state is TaskSuccess)
-          {
-            return ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemCount: state.tasks.length,
-              itemBuilder: (context, index)
-              {
-                return Column(
-                  children: [
-                    const SizedBox(height:10),
-                    TaskCard(
-                      task:state.tasks[index],
-                      onDelete: (){
-                        context.read<TaskCubit>().deleteTask(state.tasks[index].id!);
-                      },
-                      onUpdate:(updatedTask){
-                        context.read<TaskCubit>().updateTask(updatedTask);
-                      }
-                    )
-                  ],
+      body: SafeArea(
+        child: Container(
+          child: BlocBuilder<TaskCubit, TaskState>(
+            builder: (context, state) {
+              if (state is TaskLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is TaskError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        state.message,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<TaskCubit>().fetchAllTasks();
+                        },
+                        child: const Text("Retry"),
+                      ),
+                    ],
+                  ),
                 );
-              },
-            );
-          }
-          return const SizedBox.shrink();
-        },
-        ), 
-      )
-      )
+              } else if (state is TaskEmpty) {
+                return const Center(child: Text("No Tasks Available"));
+              } else if (state is TaskSuccess) {
+                return ListView.builder(
+                  padding: const EdgeInsets.all(10),
+                  itemCount: state.tasks.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        TaskCard(
+                          task: state.tasks[index],
+                          onDelete: () {
+                            context.read<TaskCubit>().deleteTask(state.tasks[index].id!);
+                          },
+                          onUpdate: (updatedTask) {
+                            context.read<TaskCubit>().updateTask(updatedTask);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      ),
     );
   }
 }
