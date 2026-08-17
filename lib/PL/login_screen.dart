@@ -28,11 +28,7 @@ class _LoginScreen extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Icon(
-                  Icons.task_alt,
-                  size: 80,
-                  color: Colors.blueAccent,
-                ),
+                
                 const SizedBox(height: 16),
                 const Text(
                   "Third Eye",
