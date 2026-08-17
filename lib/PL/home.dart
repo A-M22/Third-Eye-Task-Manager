@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:third_eye_task_manager/PL/addTask.dart';
 import 'package:third_eye_task_manager/PL/card.dart';
 import 'package:third_eye_task_manager/Models/task_model.dart';
@@ -23,6 +24,16 @@ class _home_screenState extends State<home_screen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Third Eye Task Manager"),
+        actions:[
+          IconButton(
+            icon:const Icon(Icons.logout),
+            onPressed: () async {
+              final prefs=await SharedPreferences.getInstance();
+              await prefs.setBool('isLoggedIn', false);
+              Navigator.pushReplacementNamed(context, '/login');
+            }
+          )
+        ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

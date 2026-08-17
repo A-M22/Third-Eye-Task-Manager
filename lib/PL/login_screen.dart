@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,7 +15,7 @@ class _LoginScreen extends State<LoginScreen> {
   bool _hidden=true;
   String errorMessage='';
   final emailRegex=RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-  bool isloggedin=true;
+  
 
   @override 
   Widget build(BuildContext context) {
@@ -63,11 +64,8 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
             
                   SizedBox(height: 20.0,),
-                  ElevatedButton(onPressed: ()
+                  ElevatedButton(onPressed: ()async
                   {
-
-                    isloggedin?  Navigator.pushReplacementNamed(context, '/home'):context;
-
                     if(_email.isEmpty || _password.isEmpty)
                     {
                       setState(() {
@@ -85,6 +83,9 @@ class _LoginScreen extends State<LoginScreen> {
                       setState(() {
                         errorMessage="";
                       });
+                      final prefs=await SharedPreferences.getInstance();
+                      await prefs.setBool('isLoggedIn', true);
+
                       //go to homepage after success//
                       Navigator.pushReplacementNamed(context, '/home');
                     }
