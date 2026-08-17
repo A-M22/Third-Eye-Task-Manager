@@ -1,16 +1,16 @@
-# third_eye_task_manager
+# Third Eye Task Manager
 
-A new Flutter project.
+## Description
+A Flutter task management application developed as part of the Third Eye training task. It allows users to view, add, edit, and delete tasks, with features like searching by name, filtering by status and priority, and persisting user login state.
 
-## Getting Started
+## How to Run
+1. Ensure you have Flutter installed.
+2. Clone this repository.
+3. Run `flutter pub get` to install dependencies.
+4. Run `flutter run` to launch the application.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used
+* **Framework:** Flutter / Dart
+* **State Management:** BLoC / Cubit (chosen for clean separation of business logic and UI).
+* **API:** RESTful API integration using MockAPI (supports GET, POST, PUT, DELETE).
+* **Local Storage:** `shared_preferences` for persisting the login state.
