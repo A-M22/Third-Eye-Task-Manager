@@ -14,3 +14,6 @@ A Flutter task management application developed as part of the Third Eye trainin
 * **State Management:** BLoC / Cubit (chosen for clean separation of business logic and UI).
 * **API:** RESTful API integration using MockAPI (supports GET, POST, PUT, DELETE).
 * **Local Storage:** `shared_preferences` for persisting the login state.
+
+## Task 1 Run:
+*You need to run the dart file on its on from bin folder
