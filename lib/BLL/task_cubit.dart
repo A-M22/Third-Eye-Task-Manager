@@ -21,11 +21,18 @@ class TaskSuccess extends TaskState{
 class TaskCubit extends Cubit<TaskState>{
   TaskCubit(): super(TaskLoading());
 
+  List<Task> _allTasks=[];
+  String _currentQuery='';
+  Status? _currentStatus;
+  Priority? _currentPriority;
+
   Future<void> fetchAllTasks() async{
     emit(TaskLoading());
 
     try{
       final tasks=await ApiService.fetchTasks();
+      _allTasks=tasks;
+      _applyFilters();
       if(tasks.isEmpty)
       {
         emit(TaskEmpty());
@@ -34,13 +41,103 @@ class TaskCubit extends Cubit<TaskState>{
       {
         emit(TaskSuccess(tasks));
       }
-      }
-      catch(e)
-      {
-        emit(TaskError(e.toString()));
-      }
+    }
+    catch(e)
+    {
+      emit(TaskError(e.toString()));
+    }
+  }
+
+  void updateFilters({
+    String? query,
+    Status? status,
+    Priority? priority,
+    bool clearStatus=false,
+    bool clearPriority=false,
+  }){
+    if(query!=null)
+    {
+      _currentQuery=query;
+    }
+    if(status!=null)
+    {
+      _currentStatus=status;
+    }
+    if(priority!=null)
+    {
+      _currentPriority=priority;
+    }
+    if(clearStatus)
+    {
+      _currentStatus=null;
+    }
+    if(clearPriority)
+    {
+      _currentPriority=null;
+    }
+
+    _applyFilters();
+  }
+
+  void _applyFilters()
+  {
+    var filteredTasks=_allTasks;
+    if(_currentQuery.isNotEmpty)
+    {
+      filteredTasks=filteredTasks.where((task)=>
+      task.title.toLowerCase().contains(_currentQuery.toLowerCase())).toList();
+    }
+
+    if(_currentStatus!=null)
+    {
+      filteredTasks=filteredTasks.where((task)=>task.status==_currentStatus).toList();
+    }
+
+    if(_currentPriority!=null)
+    {
+      filteredTasks=filteredTasks.where((task)=>task.priority==_currentPriority).toList();
+    }
+
+    if (_allTasks.isEmpty) {
+      emit(TaskEmpty());
+    } else if (filteredTasks.isEmpty) {
+      emit(TaskEmpty());
+    } else {
+      emit(TaskSuccess(filteredTasks));
+    }
 
   }
+
+  void searchTasks(String qurery)
+  {
+    if(qurery.isEmpty)
+    {
+      if(_allTasks.isEmpty)
+      {
+        emit(TaskEmpty());
+      }
+      else
+      {
+        emit(TaskSuccess(_allTasks));
+      }
+      return;
+    }
+    final filteredTasks=_allTasks.where((task){
+      return task.title.toLowerCase().contains(qurery.toLowerCase());
+    }).toList();
+
+    if (filteredTasks.isEmpty)
+    {
+      emit(TaskEmpty());
+    }
+    else
+    {
+      emit(TaskSuccess(filteredTasks));
+    }
+
+  }
+
+
 
   // POST: Add a new task
   Future<void> addTask(Task task) async {
